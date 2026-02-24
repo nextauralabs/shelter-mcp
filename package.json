@@ -1,0 +1,66 @@
+{
+  "name": "@shelter.money/mcp",
+  "version": "1.0.4",
+  "mcpName": "io.github.nextauralabs/shelter",
+  "description": "MCP server for Shelter — AI financial coaching powered by real bank data",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "shelter-mcp": "./dist/bin/shelter-mcp.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "smithery.yaml",
+    "server.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts src/bin/shelter-mcp.ts src/bin/shelter-mcp-http.ts --format esm,cjs --dts --clean",
+    "dev": "tsup src/index.ts src/bin/shelter-mcp.ts src/bin/shelter-mcp-http.ts --format esm --watch",
+    "start": "node dist/bin/shelter-mcp-http.js",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "shelter",
+    "finance",
+    "financial-coaching",
+    "budgeting",
+    "cash-flow",
+    "personal-finance",
+    "ai",
+    "claude",
+    "cursor",
+    "anthropic",
+    "plaid",
+    "banking"
+  ],
+  "author": "Shelter",
+  "license": "MIT",
+  "homepage": "https://shelter.money",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@smithery/cli": "^4.1.4",
+    "@types/node": "^22.10.5",
+    "esbuild": "^0.27.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.3"
+  }
+}

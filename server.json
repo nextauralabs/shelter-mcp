@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.nextauralabs/shelter",
+  "description": "AI financial coaching powered by real bank data — cash flow, alerts, and savings",
+  "repository": {
+    "url": "https://github.com/nextauralabs/wealth-vault",
+    "source": "github"
+  },
+  "version": "1.0.4",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@shelter.money/mcp",
+      "version": "1.0.4",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "SHELTER_API_KEY",
+          "description": "Your Shelter API key. Runs in demo mode without one.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        },
+        {
+          "name": "SHELTER_API_URL",
+          "description": "Custom API base URL (default: https://api.shelter.money/agent)",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

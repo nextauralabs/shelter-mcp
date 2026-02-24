@@ -1,0 +1,21 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+
+configSchema:
+  type: object
+  required:
+    - shelterApiKey
+  properties:
+    shelterApiKey:
+      type: string
+      description: Your Shelter API key. Get one at https://shelter.money
+    apiUrl:
+      type: string
+      default: https://api.shelter.money/agent
+      description: Custom API base URL. Only change this for self-hosted instances.
+
+commandFunction:
+  |-
+  (config) => ({ command: 'npx', args: ['-y', '@shelter.money/mcp'], env: { SHELTER_API_KEY: config.shelterApiKey, ...(config.apiUrl && config.apiUrl !== 'https://api.shelter.money/agent' ? { SHELTER_API_URL: config.apiUrl } : {}) } })
