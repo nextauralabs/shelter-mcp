@@ -3,7 +3,8 @@ import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { apiPost } from '../client.js';
 
 const AffordabilitySchema = z.object({
-  amount: z.number().positive().describe('The dollar amount of the purchase or expense'),
+  amount: z.number().finite().positive().describe('The major-unit amount of the purchase or expense'),
+  currency: z.string().regex(/^[A-Z]{3}$/).describe('Uppercase ISO 4217 currency code, such as CAD or USD'),
   description: z.string().min(1).describe('What the purchase or expense is for'),
 });
 
@@ -13,6 +14,7 @@ export function registerAffordabilityTool(server: McpServer) {
     'Check if you can afford a specific purchase — impact on safe-to-spend, recommendation.',
     {
       amount: AffordabilitySchema.shape.amount,
+      currency: AffordabilitySchema.shape.currency,
       description: AffordabilitySchema.shape.description,
     },
     {

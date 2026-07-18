@@ -3,13 +3,13 @@ import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { apiGet } from '../client.js';
 
 const ForecastSchema = z.object({
-  days: z.number().min(7).max(90).optional().describe('Number of days to forecast (default: 30)'),
+  days: z.literal(14).optional().describe('Verified 14-day view of the canonical 30-day run'),
 });
 
 export function registerForecastTool(server: McpServer) {
   server.tool(
     'shelter_forecast',
-    'Projected cash flow over the next few weeks — upcoming bills, paydays, and balance trajectory.',
+    'Verified 14-day view of Shelter\'s canonical 30-day balance forecast.',
     {
       days: ForecastSchema.shape.days,
     },

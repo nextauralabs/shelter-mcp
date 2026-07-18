@@ -13,7 +13,7 @@ export function registerFinancialCheckup(server: McpServer) {
             text: `You are helping a user do a comprehensive financial checkup with Shelter. Follow this workflow:
 
 ## Step 1: Check financial status
-Use the \`shelter_status\` tool to get the current snapshot — safe-to-spend, balances, health score.
+Use the \`shelter_status\` tool to get the current authoritative Safe to Spend result.
 
 ## Step 2: Review alerts
 Use the \`shelter_alerts\` tool to see if there are any urgent items — unusual spending, upcoming bills, low balance warnings.
@@ -26,11 +26,13 @@ Use the \`shelter_runway\` tool to see how many days of spending are covered and
 
 ## Step 5: Summarize
 Present a clear summary:
-- Overall health score and what it means
+- Current verified Safe to Spend status
 - Any alerts that need attention
-- Cash runway and daily budget
+- Cash runway, without deriving an unprovided daily budget
 - Upcoming pinch points from the forecast
-- One actionable recommendation`,
+- One actionable recommendation
+
+Only repeat financial claims returned with authoritative tool provenance. Do not derive or invent amounts, rates, targets, or dates. If authority is suppressed, state that the current result is unavailable.`,
           },
         },
       ],

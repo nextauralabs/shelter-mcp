@@ -6,7 +6,7 @@ async function main() {
   const apiKey = process.env.SHELTER_API_KEY;
 
   if (!apiKey) {
-    console.error('Warning: SHELTER_API_KEY not set — running in demo mode with sample data.');
+    console.error('Warning: SHELTER_API_KEY not set — financial values will be suppressed.');
     console.error('');
     console.error('For real data, set SHELTER_API_KEY:');
     console.error('  SHELTER_API_KEY=sk_xxx npx @shelter.money/mcp');

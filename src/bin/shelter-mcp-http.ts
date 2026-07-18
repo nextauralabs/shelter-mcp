@@ -67,6 +67,6 @@ const httpServer = createServer(async (req, res) => {
 httpServer.listen(PORT, () => {
   console.error(`Shelter MCP server listening on http://0.0.0.0:${PORT}/mcp`);
   if (!process.env.SHELTER_API_KEY) {
-    console.error('Warning: SHELTER_API_KEY not set — running in demo mode');
+    console.error('Warning: SHELTER_API_KEY not set — financial values are suppressed');
   }
 });

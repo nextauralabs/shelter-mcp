@@ -52,92 +52,21 @@ export async function apiPost<T = unknown>(path: string, body: unknown): Promise
 }
 
 // ---------------------------------------------------------------------------
-// Demo mode — returns illustrative sample data when no API key is configured
+// Unauthenticated mode — financial values fail closed. Sample values must
+// never be mistaken for a real user's authoritative financial state.
 // ---------------------------------------------------------------------------
 function demoResponse(path: string): unknown {
-  if (path.startsWith('/v1/status'))
-    return {
-      safeToSpend: 1247.83,
-      checking: 3421.56,
-      savings: 12500.0,
-      creditCardDebt: 1847.23,
-      upcomingBills: 2174.73,
-      runway: '18 days',
-      healthScore: 72,
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/runway'))
-    return {
-      days: 18,
-      safeToSpend: 1247.83,
-      dailyBudget: 69.32,
-      nextPayday: '2026-03-06',
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/forecast'))
-    return {
-      periods: [
-        { date: '2026-02-24', projected: 3200, label: 'Today' },
-        { date: '2026-03-01', projected: 2100, label: 'Rent due' },
-        { date: '2026-03-06', projected: 4600, label: 'Payday' },
-      ],
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/alerts'))
-    return {
-      alerts: [
-        { type: 'unusual_spending', message: 'Dining spend is 40% above your monthly average', severity: 'warning' },
-        { type: 'upcoming_bill', message: 'Rent ($1,850) due in 5 days', severity: 'info' },
-      ],
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/opportunities'))
-    return {
-      opportunities: [
-        { category: 'subscriptions', amount: 34.97, description: 'Three unused subscriptions detected' },
-        { category: 'negotiation', amount: 25.0, description: 'Your internet bill is above market rate' },
-      ],
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/context'))
-    return {
-      summary: 'Demo user with moderate financial health. Stable income, manageable debt, some savings opportunities.',
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/affordability'))
-    return {
-      canAfford: true,
-      impact: 'moderate',
-      safeToSpendAfter: 747.83,
-      recommendation: 'You can afford this, but it would use 40% of your remaining safe-to-spend balance.',
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/coach/daily'))
-    return {
-      tip: "You've spent $23 on coffee this week. Consider brewing at home 2 days a week to save ~$40/month.",
-      category: 'spending',
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/coach/advice'))
-    return {
-      advice: 'Focus on paying off your highest-interest credit card first. You could save $180/year in interest.',
-      topic: 'debt',
-      _demo: true,
-    };
-
-  if (path.startsWith('/v1/ask'))
-    return {
-      answer: 'Based on your financial data, here is a demo response. Connect your bank account for personalized insights.',
-      _demo: true,
-    };
-
-  return { message: 'Unknown endpoint', _demo: true };
+  return {
+    authority: {
+      status: 'suppressed',
+      reasonCodes: ['MISSING_SHELTER_API_KEY'],
+      currency: null,
+      asOf: '1970-01-01T00:00:00.000Z',
+      manifestId: 'unavailable',
+      formulaVersion: 'unavailable',
+    },
+    data: null,
+    message: `Financial data for ${path} is unavailable until a Shelter API key is configured.`,
+    _demo: true,
+  };
 }

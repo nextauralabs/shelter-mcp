@@ -37,10 +37,12 @@ Use the \`shelter_coach_advice\` tool with the most relevant topic (subscription
 
 ## Step 4: Present findings
 Summarize the review:
-- Total potential monthly savings identified
-- Top 3 specific actions to take (with dollar amounts)
+- Total potential monthly savings only when the tool returns an authoritative total
+- Top specific actions; include amounts only when each amount is authoritative
 - Quick wins vs. longer-term optimizations
-- Any spending patterns worth monitoring`,
+- Any spending patterns worth monitoring
+
+Never add, normalize, estimate, or invent an amount. If a tool authority is suppressed, say the current financial result is unavailable.`,
             },
           },
         ],
