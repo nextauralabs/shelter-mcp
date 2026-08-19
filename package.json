@@ -4,6 +4,9 @@
   "mcpName": "io.github.nextauralabs/shelter",
   "description": "Connect AI agents to scoped financial context from your own Shelter account",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -19,6 +22,7 @@
   "files": [
     "dist",
     "README.md",
+    "SECURITY.md",
     "smithery.yaml",
     "server.json"
   ],
@@ -53,11 +57,10 @@
   "homepage": "https://shelter.money/developers",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextauralabs/wealth-vault.git",
-    "directory": "packages/mcp"
+    "url": "git+https://github.com/nextauralabs/shelter-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/nextauralabs/wealth-vault/issues"
+    "url": "https://github.com/nextauralabs/shelter-mcp/issues"
   },
   "publishConfig": {
     "access": "public"

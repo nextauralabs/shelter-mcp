@@ -5,9 +5,8 @@
   "description": "Connect AI agents to scoped financial context from your own Shelter account",
   "websiteUrl": "https://shelter.money/developers",
   "repository": {
-    "url": "https://github.com/nextauralabs/wealth-vault",
-    "source": "github",
-    "subfolder": "packages/mcp"
+    "url": "https://github.com/nextauralabs/shelter-mcp",
+    "source": "github"
   },
   "version": "1.0.6",
   "packages": [

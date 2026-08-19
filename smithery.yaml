@@ -10,7 +10,7 @@ configSchema:
   properties:
     shelterApiKey:
       type: string
-      description: Your Shelter API key. Get one at https://shelter.money
+      description: Your Shelter API key. Create one at https://shelter.money/developer
     apiUrl:
       type: string
       default: https://api.shelter.money/agent
