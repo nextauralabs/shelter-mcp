@@ -5,7 +5,7 @@ import { registerPrompts } from './prompts/index.js';
 export function createShelterMcpServer(): McpServer {
   const server = new McpServer({
     name: 'shelter',
-    version: '1.0.6',
+    version: '1.0.7',
   });
 
   registerTools(server);

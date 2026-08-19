@@ -1,6 +1,6 @@
 {
   "name": "@shelter.money/mcp",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "mcpName": "io.github.nextauralabs/shelter",
   "description": "Connect AI agents to scoped financial context from your own Shelter account",
   "type": "module",
