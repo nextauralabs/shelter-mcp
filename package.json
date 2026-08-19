@@ -1,13 +1,13 @@
 {
   "name": "@shelter.money/mcp",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "mcpName": "io.github.nextauralabs/shelter",
-  "description": "MCP server for Shelter — AI financial coaching powered by real bank data",
+  "description": "Connect AI agents to scoped financial context from your own Shelter account",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "shelter-mcp": "./dist/bin/shelter-mcp.js"
+    "shelter-mcp": "dist/bin/shelter-mcp.js"
   },
   "exports": {
     ".": {
@@ -42,13 +42,23 @@
     "ai",
     "claude",
     "cursor",
+    "codex",
+    "openai",
     "anthropic",
     "plaid",
     "banking"
   ],
   "author": "Shelter",
   "license": "MIT",
-  "homepage": "https://shelter.money",
+  "homepage": "https://shelter.money/developers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextauralabs/wealth-vault.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/nextauralabs/wealth-vault/issues"
+  },
   "publishConfig": {
     "access": "public"
   },

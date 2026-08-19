@@ -1,6 +1,6 @@
 /**
  * @shelter.money/mcp
- * MCP server for Shelter — AI financial coaching powered by real bank data
+ * Connect AI agents to scoped financial context from the user's own Shelter account.
  */
 
 import { z } from 'zod';
@@ -10,7 +10,7 @@ import { createShelterMcpServer } from './server.js';
 
 /**
  * Smithery sandbox — allows Smithery to scan tools/prompts without real credentials.
- * Our server already runs in demo mode when no API key is set.
+ * Without a key, tool discovery works but every financial value remains suppressed.
  */
 export function createSandboxServer() {
   return createShelterMcpServer();
@@ -26,9 +26,7 @@ export default createSandboxServer;
 export const configSchema = z.object({
   shelterApiKey: z
     .string()
-    .describe(
-      'Your Shelter API key. Get one at https://shelter.money'
-    ),
+    .describe('Your Shelter API key. Create one at https://shelter.money/developer'),
   apiUrl: z
     .string()
     .url()

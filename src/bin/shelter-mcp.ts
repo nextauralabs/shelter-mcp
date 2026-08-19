@@ -9,7 +9,7 @@ async function main() {
     console.error('Warning: SHELTER_API_KEY not set — financial values will be suppressed.');
     console.error('');
     console.error('For real data, set SHELTER_API_KEY:');
-    console.error('  SHELTER_API_KEY=sk_xxx npx @shelter.money/mcp');
+    console.error('  SHELTER_API_KEY=wv_your_key_here npx @shelter.money/mcp');
     console.error('');
     console.error('Or configure in Claude Desktop:');
     console.error('  {');
@@ -17,7 +17,7 @@ async function main() {
     console.error('      "shelter": {');
     console.error('        "command": "npx",');
     console.error('        "args": ["-y", "@shelter.money/mcp"],');
-    console.error('        "env": { "SHELTER_API_KEY": "sk_xxx" }');
+    console.error('        "env": { "SHELTER_API_KEY": "wv_your_key_here" }');
     console.error('      }');
     console.error('    }');
     console.error('  }');
