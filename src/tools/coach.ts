@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { apiGet } from '../client.js';
+import type { ShelterApiClient } from '../client.js';
 
 const DailySchema = z.object({
   category: z.enum(['spending', 'saving', 'debt', 'general']).optional().describe('Focus area for today\'s tip'),
@@ -12,7 +12,7 @@ const AdviceTopicSchema = z.object({
     .describe('The financial topic to get advice on'),
 });
 
-export function registerCoachTools(server: McpServer) {
+export function registerCoachTools(server: McpServer, client: ShelterApiClient) {
   server.tool(
     'shelter_coach_daily',
     'Get today\'s personalized financial coaching tip based on your recent spending.',
@@ -30,7 +30,7 @@ export function registerCoachTools(server: McpServer) {
       try {
         const input = DailySchema.parse(args);
         const params = input.category ? { category: input.category } : undefined;
-        const result = await apiGet('/v1/coach/daily', params);
+        const result = await client.get('/v1/coach/daily', params);
         return {
           content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };
@@ -64,7 +64,7 @@ export function registerCoachTools(server: McpServer) {
     async (args) => {
       try {
         const input = AdviceTopicSchema.parse(args);
-        const result = await apiGet('/v1/coach/advice', { topic: input.topic });
+        const result = await client.get('/v1/coach/advice', { topic: input.topic });
         return {
           content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };

@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { apiGet } from '../client.js';
+import type { ShelterApiClient } from '../client.js';
 
 const ContextSchema = z.object({
   detail: z.enum(['summary', 'full']).optional().describe('Level of detail — "summary" for a brief overview, "full" for comprehensive context'),
 });
 
-export function registerContextTool(server: McpServer) {
+export function registerContextTool(server: McpServer, client: ShelterApiClient) {
   server.tool(
     'shelter_context',
     'Get a natural-language summary of the user\'s financial situation for use as conversation context.',
@@ -24,7 +24,7 @@ export function registerContextTool(server: McpServer) {
       try {
         const input = ContextSchema.parse(args);
         const params = input.detail ? { detail: input.detail } : undefined;
-        const result = await apiGet('/v1/context', params);
+        const result = await client.get('/v1/context', params);
         return {
           content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };

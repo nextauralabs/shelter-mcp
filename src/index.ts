@@ -5,7 +5,8 @@
 
 import { z } from 'zod';
 
-export { createShelterMcpServer } from './server.js';
+export { createShelterMcpServer, SERVER_VERSION, type ShelterMcpServerOptions } from './server.js';
+export { createEnvClient, type ShelterApiClient } from './client.js';
 import { createShelterMcpServer } from './server.js';
 
 /**

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { apiPost } from '../client.js';
+import type { ShelterApiClient } from '../client.js';
 
 const AffordabilitySchema = z.object({
   amount: z.number().finite().positive().describe('The major-unit amount of the purchase or expense'),
@@ -8,7 +8,7 @@ const AffordabilitySchema = z.object({
   description: z.string().min(1).describe('What the purchase or expense is for'),
 });
 
-export function registerAffordabilityTool(server: McpServer) {
+export function registerAffordabilityTool(server: McpServer, client: ShelterApiClient) {
   server.tool(
     'shelter_affordability',
     'Check if you can afford a specific purchase — impact on safe-to-spend, recommendation.',
@@ -27,7 +27,7 @@ export function registerAffordabilityTool(server: McpServer) {
     async (args) => {
       try {
         const input = AffordabilitySchema.parse(args);
-        const result = await apiPost('/v1/affordability', input);
+        const result = await client.post('/v1/affordability', input);
         return {
           content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };

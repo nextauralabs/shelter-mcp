@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { apiGet } from '../client.js';
+import type { ShelterApiClient } from '../client.js';
 
 const AlertsSchema = z.object({
   severity: z.enum(['info', 'warning', 'critical']).optional().describe('Filter alerts by severity level'),
 });
 
-export function registerAlertsTool(server: McpServer) {
+export function registerAlertsTool(server: McpServer, client: ShelterApiClient) {
   server.tool(
     'shelter_alerts',
     'Get active financial alerts — unusual spending, upcoming bills, low balance warnings.',
@@ -24,7 +24,7 @@ export function registerAlertsTool(server: McpServer) {
       try {
         const input = AlertsSchema.parse(args);
         const params = input.severity ? { severity: input.severity } : undefined;
-        const result = await apiGet('/v1/alerts', params);
+        const result = await client.get('/v1/alerts', params);
         return {
           content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };

@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { apiGet } from '../client.js';
+import type { ShelterApiClient } from '../client.js';
 
 const OpportunitiesSchema = z.object({
   category: z.enum(['subscriptions', 'bills', 'spending', 'negotiation']).optional().describe('Filter opportunities by category'),
 });
 
-export function registerOpportunitiesTool(server: McpServer) {
+export function registerOpportunitiesTool(server: McpServer, client: ShelterApiClient) {
   server.tool(
     'shelter_opportunities',
     'Find savings opportunities — unused subscriptions, negotiable bills, spending patterns to optimize.',
@@ -24,7 +24,7 @@ export function registerOpportunitiesTool(server: McpServer) {
       try {
         const input = OpportunitiesSchema.parse(args);
         const params = input.category ? { category: input.category } : undefined;
-        const result = await apiGet('/v1/opportunities', params);
+        const result = await client.get('/v1/opportunities', params);
         return {
           content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };
